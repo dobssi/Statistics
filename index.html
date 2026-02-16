@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swedish Mortality Analysis - Statistical Debunking Reports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .author {
+            margin-top: 15px;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .reports-grid {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .report-card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .report-card .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .report-card .description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .report-card .highlights {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .report-card .highlights h3 {
+            color: #34495e;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .report-card .highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .report-card .highlights li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .report-card .highlights li:before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            margin-left: 10px;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .info-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .info-section p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .data-sources {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .data-sources h3 {
+            color: #34495e;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .data-sources ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .data-sources li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Swedish Mortality Analysis</h1>
+            <p class="subtitle">Statistical Analysis & Debunking of Misleading Claims</p>
+            <p class="author">Analysis by Claude Sonnet 4.5, prompted by @dobssi | February 2026</p>
+        </header>
+
+        <div class="info-section">
+            <h2>About This Repository</h2>
+            <p>This repository contains rigorous statistical analyses of Swedish mortality data (2000-2025), with a focus on identifying and debunking misleading statistical claims circulating on social media.</p>
+            <p>All analyses use official Swedish and European mortality statistics, with transparent methodologies and full source attribution.</p>
+            
+            <div class="data-sources">
+                <h3>Data Sources</h3>
+                <ul>
+                    <li><strong>Swedish Official Statistics:</strong> The Health and Welfare Statistical Database (Hälso- och sjukvårdens statistikdatabas)</li>
+                    <li><strong>Eurostat:</strong> Weekly death statistics by age group</li>
+                    <li><strong>Methodology:</strong> Linear baselines (2010-2019), 95% prediction intervals, standard epidemiological methods</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reports-grid">
+            <!-- Report 1: Comprehensive Mortality Analysis -->
+            <div class="report-card">
+                <h2>📊 Sweden Mortality Analysis 2000-2025</h2>
+                <p class="date">February 16, 2026 | Comprehensive Report</p>
+                <p class="description">
+                    A comprehensive analysis of Swedish natural causes mortality across all 20 age groups (0-4 through 95+), examining excess mortality patterns and 2025 early trends through Week 39.
+                </p>
+                
+                <div class="highlights">
+                    <h3>Key Findings:</h3>
+                    <ul>
+                        <li>Analysis of all age groups with dual baseline comparisons (2000-19 and 2010-19 linear)</li>
+                        <li>6-10 age groups showed CI breaches in 2023-2024</li>
+                        <li>2025 data shows improvement: zero age groups tracking >5% above baseline</li>
+                        <li>Youngest ages (0-14) continue at or below pre-pandemic baselines</li>
+                        <li>Includes embedded visualizations for all age groups</li>
+                    </ul>
+                </div>
+                
+                <a href="Sweden_Mortality_Analysis_2000-2025.html" class="btn">View Full Report</a>
+            </div>
+
+            <!-- Report 2: Child Mortality Debunking -->
+            <div class="report-card">
+                <h2>🔍 Debunking: Swedish Child Mortality Claims</h2>
+                <p class="date">February 12, 2026 | Ages 0-4 Analysis</p>
+                <p class="description">
+                    Comprehensive debunking of claims that Swedish child mortality (ages 0-4) showed a "66% increase in 2024" and that "disease-related causes stopped declining."
+                </p>
+                
+                <div class="highlights">
+                    <h3>Key Findings:</h3>
+                    <ul>
+                        <li>Claimed "66% increase" was actually an 8.7% <strong>decrease</strong> in total deaths</li>
+                        <li>2024 showed 242 deaths (52 below 2010-19 linear baseline, -17.7%)</li>
+                        <li>Lowest year on record in entire 1997-2024 dataset</li>
+                        <li>Exposes "54 causes" small number statistics fallacy</li>
+                        <li>2025 tracking even lower through Week 39</li>
+                    </ul>
+                </div>
+                
+                <a href="Debunking_Swedish_Child_Mortality_Claims.md" class="btn">Read Analysis (Markdown)</a>
+            </div>
+
+            <!-- Report 3: "Blue Bands" Visualization Trick -->
+            <div class="report-card">
+                <h2>⚠️ Debunking: The "Increasing Blue Bands" Trick</h2>
+                <p class="date">February 16, 2026 | Statistical Manipulation Exposed</p>
+                <p class="description">
+                    Analysis of a sophisticated visualization technique that creates the illusion of a mortality crisis by measuring "percentage of causes increasing" while total mortality actually declined.
+                </p>
+                
+                <div class="highlights">
+                    <h3>The Deception:</h3>
+                    <ul>
+                        <li>Chart shows "more blue" (more causes increasing) while total mortality fell 15-18%</li>
+                        <li>Ages 20-24: Actual mortality down 14.8% vs baseline</li>
+                        <li>Ages 25-29: Actual mortality down 18.3% vs baseline</li>
+                        <li>Mechanism: Major causes decline significantly, many tiny causes randomly increase</li>
+                        <li>Includes "Coin Flip Crisis" analogy and detailed examples</li>
+                    </ul>
+                </div>
+                
+                <a href="Debunking_Cause_Ranking_Trick.html" class="btn">View Debunking</a>
+                <a href="Debunking_Cause_Ranking_Trick.md" class="btn btn-secondary">Markdown Version</a>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Methodology</h2>
+            <p><strong>Baseline Selection:</strong> All analyses use 2010-2019 linear baselines to properly account for pre-existing declining mortality trends. Using flat averages would artificially inflate deficits in contexts where mortality is declining.</p>
+            
+            <p><strong>Statistical Approach:</strong> Linear regression on baseline period, 95% prediction intervals using t-distribution, accounting for both regression uncertainty and natural variation.</p>
+            
+            <p><strong>Transparency:</strong> All data sources are cited, methodologies are explained, and limitations are acknowledged. Charts and visualizations are embedded directly in reports for easy verification.</p>
+        </div>
+
+        <footer>
+            <p>All analyses based on official Swedish and European statistical data</p>
+            <p>Questions or feedback? Contact <a href="https://twitter.com/dobssi">@dobssi</a></p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Last updated: February 16, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
