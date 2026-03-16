@@ -1,0 +1,318 @@
+<style>
+:root { --accent: #1F3864; --accent2: #2E5A88; --green: #2E7D32; --amber: #D4A843; --red: #C62828; --orange: #E65100; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 15px; line-height: 1.6; color: var(--color-text-primary, #222); max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem; }
+h1 { font-size: 22px; font-weight: 600; color: var(--accent); margin: 2.5rem 0 0.75rem; border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+h2 { font-size: 17px; font-weight: 600; color: var(--accent2); margin: 1.5rem 0 0.5rem; }
+p { margin: 0 0 0.75rem; }
+.note { margin: 0.75rem 0 1rem; padding: 0.6rem 0.75rem; border-left: 4px solid var(--amber); font-size: 13.5px; font-style: italic; color: var(--color-text-secondary, #555); background: var(--color-background-secondary, #f9f8f5); border-radius: 0 6px 6px 0; }
+table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1rem; font-size: 13.5px; }
+th { background: var(--accent); color: #fff; font-weight: 500; text-align: left; padding: 7px 10px; }
+th.r { text-align: right; }
+td { padding: 6px 10px; border-bottom: 1px solid var(--color-border-tertiary, #e0e0e0); color: var(--color-text-primary, #222); }
+td.r { text-align: right; }
+td.b { font-weight: 600; }
+tr.hl td { background: var(--color-background-secondary, #f0eff8); }
+tr.total td { background: var(--accent); color: #fff; font-weight: 600; }
+tr.subtotal td { background: #D6E4F0; font-weight: 600; }
+.g { color: var(--green); } .a { color: var(--amber); } .r2 { color: var(--red); } .o { color: var(--orange); }
+.title-block { text-align: center; padding: 3rem 0 2rem; border-bottom: 3px solid var(--amber); margin-bottom: 2rem; }
+.title-block h1 { font-size: 32px; border: none; margin: 0 0 0.25rem; color: var(--accent); }
+.title-block .sub { font-size: 20px; color: var(--accent2); margin-bottom: 0.5rem; }
+.title-block .detail { font-size: 14px; color: var(--color-text-secondary, #666); }
+.band-green { background: #E8F5E9; }
+.band-amber { background: #FFF8E1; }
+.band-orange { background: #FFF3E0; }
+.band-red { background: #FFEBEE; }
+.chart-section { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--color-border-tertiary, #e0e0e0); border-radius: 8px; background: var(--color-background-primary, #fff); }
+@media print { body { font-size: 12px; } h1 { font-size: 18px; } .chart-section { break-inside: avoid; } }
+</style>
+
+<div class="title-block">
+<h1>Highbury Place Property Analysis</h1>
+<div class="sub">Sell vs. Hold: CGT, Rental Income & Decision Framework</div>
+<div class="detail">Prepared for Paul & Camilla — March 2026 — Confidential</div>
+<div class="detail" style="margin-top:0.5rem; font-style:italic;">Based on AI-assisted analysis. All figures illustrative. Must be verified by Grant Thornton before decisions are made.</div>
+</div>
+
+<h1>1. Situation overview</h1>
+<p>This document analyses the financial implications of selling versus re-letting 21 Highbury Place, London N5 1QP — a Grade II listed Georgian house of approximately 4,350 sq ft across five floors, overlooking Highbury Fields. Purchased in 2010, occupied as the family home until mid-2020.</p>
+<p>The property is now dual-marketed: for sale and for let at a guide of £20,000/month through Savills (March 2026). A verbal purchase offer of £5.4m has been received and rejected but the buyer is being encouraged to return. There has been letting interest. A decision deadline of 1–2 weeks has been set.</p>
+
+<h2>Key facts</h2>
+<table>
+<tr><td class="b">Purchase date</td><td>10 December 2010</td></tr>
+<tr><td class="b">Purchase cost (incl. SDLT & fees)</td><td>£4,215,412</td></tr>
+<tr><td class="b">Refurbishment (2011–12)</td><td>~£1,000,000 (architect + QS documented)</td></tr>
+<tr><td class="b">Occupied as main home</td><td>Dec 2010 – July 2020</td></tr>
+<tr><td class="b">N5 mortgage</td><td>£831,000 — Barclays/Woolwich, interest only, 2.49% fixed until 31 May 2027, then BBBR+3.49%. Currently £1,724/month</td></tr>
+<tr><td class="b">SW3 mortgage</td><td>~£1,560,000 — interest only, index-linked, ~£7,000/month</td></tr>
+<tr><td class="b">N5 early repayment charge</td><td>5% (£41,550) until 31 May 2027, then nil</td></tr>
+<tr><td class="b">Tax residency</td><td>Sweden (since July 2020)</td></tr>
+</table>
+<div class="note">The SW3 mortgage was taken out in 2024 with the intention to pay it down from N5 sale proceeds. Both mortgages must be factored into net proceeds. The N5 rate change on 31 May 2027 is a critical planning date — see Section 10.</div>
+
+<h1>2. Capital gains tax analysis</h1>
+<h2>2.1 Why Sweden dominates</h2>
+<p>As Swedish tax residents, Paul and Camilla are subject to Swedish CGT on worldwide disposals. The UK also taxes the gain but the UK–Sweden Double Tax Treaty ensures Sweden credits UK tax paid. Total tax is capped by Sweden — the higher-tax jurisdiction.</p>
+<p>Sweden charges ~27% effective CGT (näringsbostad), does not allow April 2015 rebasing, provides no private residence relief, and critically taxes FX movements as real gains. FX is the single largest driver of the tax bill.</p>
+
+<h2>2.2 Swedish CGT methodology</h2>
+<p>Each component (purchase, improvements, sale) is converted into SEK at the Riksbank spot rate on the date it arose. The gain is calculated entirely in SEK. The taxable event is the binding contract date (exchange), not completion.</p>
+
+<h2>2.3 Illustrative CGT calculation (sale at £5.5m)</h2>
+<table>
+<tr><th>Component</th><th class="r">GBP</th><th class="r">GBP/SEK</th><th class="r">SEK</th></tr>
+<tr><td>Purchase cost (10 Dec 2010)</td><td class="r">£4,215,412</td><td class="r">10.95</td><td class="r">46,148,000</td></tr>
+<tr><td>Improvements (2011–12 spread)</td><td class="r">£1,000,000</td><td class="r">~10.60</td><td class="r">10,600,000</td></tr>
+<tr class="hl"><td class="b">Total SEK base cost</td><td></td><td></td><td class="r b">56,748,000</td></tr>
+<tr><td>Sale proceeds (£5.5m)</td><td class="r">£5,500,000</td><td class="r">13.60</td><td class="r">74,800,000</td></tr>
+<tr><td>Less selling costs</td><td class="r">(£90,000)</td><td class="r">13.60</td><td class="r">(1,224,000)</td></tr>
+<tr class="hl"><td class="b">Net SEK sale proceeds</td><td></td><td></td><td class="r b">73,576,000</td></tr>
+<tr class="subtotal"><td>Swedish taxable gain</td><td></td><td></td><td class="r">SEK 16,828,000</td></tr>
+<tr class="total"><td>Swedish CGT @ 27%</td><td></td><td></td><td class="r">SEK 4,544,000 (~£334k)</td></tr>
+</table>
+<div class="note">At £6.0m, Swedish CGT rises to ~SEK 6,340,000 (~£466k). The FX-driven component is substantial — GBP/SEK has moved from ~10.5–11.0 at purchase to ~13.6 today.</div>
+
+<h2>2.4 UK CGT & rebasing</h2>
+<p>Rebasing to April 2015 offers no economic advantage: Swedish CGT exceeds UK CGT under any method, and rebasing introduces temporary non-residence clawback risk with no offsetting Swedish refund. Without rebasing, UK CGT is ~£65–70k (after 69% PRR), fully creditable against Sweden.</p>
+<table>
+<tr><th>Strategy</th><th class="r">No UK return</th><th class="r">UK return &lt;5yrs</th><th>Recommendation</th></tr>
+<tr><td class="b">No rebasing</td><td class="r">~£335k total</td><td class="r">~£335k total</td><td class="b g">PREFERRED</td></tr>
+<tr><td class="b">With rebasing</td><td class="r">~£335k total</td><td class="r">~£400k total</td><td class="r2">Not recommended</td></tr>
+</table>
+
+<h1>3. Net proceeds on sale</h1>
+<table>
+<tr><th></th><th class="r">Sale at £5.5m</th><th class="r">Sale at £6.0m</th></tr>
+<tr><td>Gross sale proceeds</td><td class="r">£5,500,000</td><td class="r">£6,000,000</td></tr>
+<tr><td>Agent & solicitor fees</td><td class="r">(£90,000)</td><td class="r">(£100,000)</td></tr>
+<tr><td>Repay N5 mortgage</td><td class="r">(£831,000)</td><td class="r">(£831,000)</td></tr>
+<tr><td>N5 early repayment charge</td><td class="r">(£41,550)</td><td class="r">(£41,550)</td></tr>
+<tr><td>Repay SW3 mortgage</td><td class="r">(£1,560,000)</td><td class="r">(£1,560,000)</td></tr>
+<tr><td>Swedish CGT (estimated)</td><td class="r">(~£335,000)</td><td class="r">(~£466,000)</td></tr>
+<tr class="total"><td>Net cash in hand</td><td class="r">~£2,642,000</td><td class="r">~£3,001,000</td></tr>
+</table>
+
+<h1>4. Rental income tax position</h1>
+<h2>4.1 UK rental tax</h2>
+<p>Non-resident landlords under NRLS. Mortgage interest is a 20% credit (not deduction) since April 2020. SW3 mortgage not deductible. At Paul's 45% rate, UK rental tax on ~£160k net income ≈ £65–70k/year.</p>
+<h2>4.2 Swedish rental tax</h2>
+<p>Taxed as business income (inkomst av näringsverksamhet) at marginal rates up to ~50–55%. However, Sweden allows full mortgage interest deduction, building depreciation (2–3% p.a.), and all operating costs. Depreciation may be recaptured on sale.</p>
+<h2>4.3 Estimated net rental cash flow at £20k/month</h2>
+<table>
+<tr><th>Item</th><th class="r">Annual (est.)</th></tr>
+<tr><td>Gross rental income (£20k/month)</td><td class="r">£240,000</td></tr>
+<tr><td>Letting agent fees (~12%)</td><td class="r">(£29,000)</td></tr>
+<tr><td>Insurance</td><td class="r">(£10,000)</td></tr>
+<tr><td>Maintenance & repairs</td><td class="r">(£12,000)</td></tr>
+<tr><td>Council tax & utilities</td><td class="r">(£5,000)</td></tr>
+<tr><td>N5 mortgage</td><td class="r">(£20,400)</td></tr>
+<tr><td>SW3 mortgage</td><td class="r">(£84,000)</td></tr>
+<tr><td>Net rental tax (UK + Sweden)</td><td class="r">(~£78,000)</td></tr>
+<tr class="total"><td>Net annual cash flow</td><td class="r">~+£1,600</td></tr>
+</table>
+<div class="note">At £20k/month the property is essentially self-sustaining. At £22–23k/month, cash flow rises to £25–50k+/year. Without the SW3 mortgage, it would generate ~£85k/year.</div>
+
+<h1>5. Sell now vs. hold & re-let</h1>
+<h2>5.1 Opportunity cost of capital</h2>
+<p>Selling at £5.5m yields ~£2.72m net. At 4% net return (after Swedish tax):</p>
+<table>
+<tr><th>Horizon</th><th class="r">3% (conservative)</th><th class="r">4% (base case)</th><th class="r">6% (optimistic)</th></tr>
+<tr><td class="b">2 years</td><td class="r">£2.89m</td><td class="r">£2.94m</td><td class="r">£3.06m</td></tr>
+<tr><td class="b">3 years</td><td class="r">£2.97m</td><td class="r">£3.06m</td><td class="r">£3.24m</td></tr>
+<tr><td class="b">5 years</td><td class="r">£3.15m</td><td class="r">£3.31m</td><td class="r">£3.64m</td></tr>
+</table>
+
+<h2>5.2 Breakeven sale prices (at 4% net return)</h2>
+<table>
+<tr><th>Horizon</th><th class="r">Breakeven price</th><th class="r">Required growth</th><th class="r">Annual growth</th></tr>
+<tr><td class="b">2 years</td><td class="r">~£5.80m</td><td class="r">+5%</td><td class="r">~2.5% p.a.</td></tr>
+<tr><td class="b">3 years</td><td class="r">~£5.95m</td><td class="r">+8%</td><td class="r">~2.7% p.a.</td></tr>
+<tr><td class="b">5 years</td><td class="r">~£6.30m</td><td class="r">+15%</td><td class="r">~2.8% p.a.</td></tr>
+</table>
+
+<h1>6. Crossover analysis: what rent makes holding beat selling?</h1>
+<p>Higher rent raises the crossover price — the more profitable the rental, the higher the sale price needed to justify giving it up.</p>
+<table>
+<tr><th>Monthly rent</th><th class="r">Annual CF</th><th class="r">Crossover (2yr)</th><th class="r">Crossover (3yr)</th><th class="r">Crossover (5yr)</th></tr>
+<tr><td class="b">£15,000</td><td class="r r2">–£30k</td><td class="r">~£4.7m</td><td class="r">~£4.8m</td><td class="r">~£5.0m</td></tr>
+<tr><td class="b">£17,500</td><td class="r r2">–£11k</td><td class="r">~£4.8m</td><td class="r">~£4.9m</td><td class="r">~£5.1m</td></tr>
+<tr class="hl"><td class="b">£20,000</td><td class="r">~breakeven</td><td class="r">~£5.0m</td><td class="r">~£5.1m</td><td class="r">~£5.3m</td></tr>
+<tr><td class="b">£22,500</td><td class="r g">+£18k</td><td class="r">~£5.2m</td><td class="r">~£5.4m</td><td class="r">~£5.6m</td></tr>
+<tr><td class="b">£25,000</td><td class="r g">+£37k</td><td class="r">~£5.4m</td><td class="r">~£5.6m</td><td class="r">~£5.9m</td></tr>
+</table>
+
+<h2>6.1 Decision framework by price band</h2>
+<table>
+<tr><th>Achievable price</th><th>Action</th><th>Rationale</th></tr>
+<tr class="band-green"><td class="b">£5.5m+</td><td class="b g">Sell</td><td>Clear winner. Bank £2.7m+, clear both mortgages.</td></tr>
+<tr class="band-amber"><td class="b">£5.0–£5.5m</td><td class="b a">Depends on rent</td><td>At £20k+ rent, holding is viable. At £15–17.5k, selling wins.</td></tr>
+<tr class="band-orange"><td class="b">£4.5–£5.0m</td><td class="b o">Hold / re-let</td><td>Below crossover at any realistic rent. Wait for better market.</td></tr>
+<tr class="band-red"><td class="b">Below £4.5m</td><td class="b r2">Definitely hold</td><td>Too much loss. At £20k rent it carries itself. Preserve optionality.</td></tr>
+</table>
+
+<h1>7. The cost of time</h1>
+<p>While empty: ~£13,200/month carrying cost plus ~£9,000/month foregone investment return = ~£22,000/month total. Holding out for an extra £100k is only worthwhile within ~5–6 months.</p>
+<table>
+<tr><th>Scenario</th><th class="r">Time cost</th><th class="r">Net benefit</th><th>Verdict</th></tr>
+<tr><td>Push buyer up £100k, 1–2 weeks</td><td class="r">~£5–10k</td><td class="r">+£60–65k</td><td class="b g">Worth doing</td></tr>
+<tr><td>Wait 3 months for better buyer</td><td class="r">~£65k</td><td class="r">Break even</td><td class="b a">Marginal</td></tr>
+<tr><td>Wait 6 months for £5.7m+</td><td class="r">~£130k</td><td class="r">Likely negative</td><td class="b r2">Not worth it</td></tr>
+<tr><td>Wait 12 months for £6m+</td><td class="r">~£260k</td><td class="r">Negative unless £6.3m+</td><td class="b r2">Re-let instead</td></tr>
+</table>
+
+<h1>8. Live offer analysis (March 2026)</h1>
+<p>Verbal offer of £5.4m received and rejected. Agent encouraged to bring the buyer back. Simultaneously marketed for let at £20k/month with interest received.</p>
+<table>
+<tr><th>Item</th><th class="r">Amount</th></tr>
+<tr><td>Gross sale proceeds</td><td class="r">£5,400,000</td></tr>
+<tr><td>Agent & solicitor fees</td><td class="r">(£88,000)</td></tr>
+<tr><td>Repay N5 mortgage</td><td class="r">(£831,000)</td></tr>
+<tr><td>N5 early repayment charge</td><td class="r">(£41,550)</td></tr>
+<tr><td>Repay SW3 mortgage</td><td class="r">(£1,560,000)</td></tr>
+<tr><td>Swedish CGT (~£310k)</td><td class="r">(£310,000)</td></tr>
+<tr class="total"><td>Net cash in hand</td><td class="r">~£2,569,000</td></tr>
+</table>
+
+<h2>8.1 Decision framework at deadline</h2>
+<table>
+<tr><th>Scenario</th><th>Action</th><th>Rationale</th></tr>
+<tr><td>Buyer at £5.5m+ and tenant interest</td><td class="b g">Sell</td><td>Clear winner at any rent level.</td></tr>
+<tr><td>Buyer at £5.4m and strong tenant at £20k+</td><td class="b a">Finely balanced</td><td>Sale marginally better. Letting viable and preserves upside.</td></tr>
+<tr><td>Buyer at £5.4m, weak letting interest</td><td class="b g">Sell</td><td>Take the certain outcome.</td></tr>
+<tr><td>No firm buyer, strong tenant at £20k+</td><td class="b" style="color:var(--accent2)">Let</td><td>Covers costs. Wait from position of strength.</td></tr>
+<tr><td>No firm buyer, no strong tenant</td><td class="b r2">Re-evaluate</td><td>Reduce price or rent. Avoid sitting empty.</td></tr>
+</table>
+
+<h1>9. The Värmdö option</h1>
+<p>Selling the summer house in Södernäs, Värmdö (purchased 2006, 3.6m SEK, est. 8–10m SEK) to pay down the SW3 mortgage. This transforms the London hold case from breakeven to cash-flow positive.</p>
+<table>
+<tr><th></th><th class="r">Sale at 8m SEK</th><th class="r">Sale at 10m SEK</th></tr>
+<tr><td>CGT @ 22% (privatbostad)</td><td class="r">~880,000</td><td class="r">~1,310,000</td></tr>
+<tr><td class="b">Net proceeds (SEK)</td><td class="r b">~6,920,000</td><td class="r b">~8,440,000</td></tr>
+<tr><td class="b">Net proceeds (GBP)</td><td class="r b">~£509,000</td><td class="r b">~£621,000</td></tr>
+</table>
+<div class="note">Uppskov (CGT deferral) may be available if the 2020 pandemic occupation qualifies as permanentbostad. Grant Thornton must confirm — this could increase available capital by £65–96k. Seasonal Airbnb usage needs to be assessed for impact on privatbostad classification.</div>
+<table>
+<tr><th></th><th class="r">No Värmdö sale</th><th class="r">Värmdö @ 8m</th><th class="r">Värmdö @ 10m</th></tr>
+<tr><td>SW3 mortgage remaining</td><td class="r">£1,560k</td><td class="r">~£1,050k</td><td class="r">~£940k</td></tr>
+<tr><td>Monthly SW3 cost</td><td class="r">£7,000</td><td class="r">~£4,700</td><td class="r">~£4,200</td></tr>
+<tr><td>Annual London rental CF</td><td class="r">(£11k)</td><td class="r g">+£17k</td><td class="r g">+£23k</td></tr>
+</table>
+
+<h1>10. The May 2027 mortgage cliff</h1>
+<p>The N5 fixed rate expires 31 May 2027. The rate reverts to BBBR + 3.49% (floored at 3.49%). Simultaneously, the £41,550 ERC expires.</p>
+<h2>10.1 The rate shock</h2>
+<table>
+<tr><th>Scenario</th><th class="r">Rate</th><th class="r">Monthly</th><th class="r">Annual</th></tr>
+<tr><td>Current (fixed)</td><td class="r">2.49%</td><td class="r b g">£1,724</td><td class="r">£20,692</td></tr>
+<tr><td>BoE falls to 3.5%</td><td class="r">~6.99%</td><td class="r b a">~£4,835</td><td class="r">~£58,020</td></tr>
+<tr><td>BoE stays ~4.5%</td><td class="r">~7.99%</td><td class="r b r2">~£5,527</td><td class="r">~£66,324</td></tr>
+<tr><td>Floor (BBBR = 0%)</td><td class="r">3.49%</td><td class="r b">~£2,415</td><td class="r">~£28,980</td></tr>
+</table>
+<div class="note">Even at the floor, payments rise 40%. At current rates, they roughly triple. This is the single biggest risk to the hold case beyond 14 months.</div>
+
+<h2>10.2 The tenant trap</h2>
+<p>You cannot market a house for sale with tenants in it. With a 12-month break clause exercised in spring 2027, the property is vacant from ~May 2027 — exactly when the rate shock hits. Marketing empty on the variable rate costs ~£17–18k/month. The family has already endured 10 months of empty marketing at the lower fixed rate.</p>
+<h2>10.3 Realistic hold scenarios</h2>
+<table>
+<tr><th>Strategy</th><th>How it works</th><th>Risk</th></tr>
+<tr><td class="b">Short let + sell</td><td>12-month let, break spring 2027, market from ~June 2027 on variable rate.</td><td class="r2">Empty-property trap at £17–18k/month. Most dangerous option.</td></tr>
+<tr><td class="b">Long let + hold</td><td>2–3 year AST. Accept rate change. Mitigate via Värmdö/remortgage.</td><td class="a">Committed hold. Variable rate risk. Remortgage uncertain.</td></tr>
+<tr><td class="b">Sell now</td><td>Accept £5.4m+. Complete in 3–4 months. Pay £41.5k ERC.</td><td class="g">Crystallises below expectations but eliminates all risk.</td></tr>
+</table>
+
+<h1>11. Key risks of holding</h1>
+<p><strong>The empty-property trap</strong> is the most dangerous practical risk. Any hold strategy involving a future vacant marketing period risks a repeat of the 10-month experience — but at triple the mortgage cost after May 2027.</p>
+<p><strong>The mortgage rate shock</strong> on 31 May 2027 transforms hold economics from breakeven to ~£45k/year cash-negative.</p>
+<p><strong>FX drift</strong> increases Swedish CGT every year as GBP/SEK diverges from 2010–12 rates.</p>
+<p><strong>Market risk</strong> in prime London above £5m: stamp duty headwinds, reduced buyer pool, no obvious recovery catalyst.</p>
+<p><strong>Cross-border complexity</strong>: annual dual-jurisdiction rental tax filings, mortgage interest interaction, depreciation recapture.</p>
+
+<h1>12. CGT cash management on sale</h1>
+<p>Swedish CGT from a 2026 sale is reported in the spring 2027 return, with payment due ~autumn 2027 (18–20 months float). Skatteverket charges interest from 13 February 2027. Optimal strategy: convert estimated CGT to SEK after exchange, hold in high-quality savings until Skatteverket rate exceeds net-of-tax savings rate, then pay.</p>
+
+<h1 style="margin-top:2.5rem;">13. Interactive analysis: rent needed to beat each offer</h1>
+<p>This model factors in the May 2027 rate shock (2.49% for 14 months, 2-month vacancy, then ~8% variable). Use the sliders to explore scenarios.</p>
+
+<div class="chart-section">
+<div style="display: flex; align-items: center; gap: 12px; margin: 0 0 0.5rem;">
+  <label style="font-size: 14px; color: var(--color-text-secondary, #666); min-width: 140px;">Hold period</label>
+  <input type="range" min="2" max="5" value="2" step="1" id="holdYears" style="flex: 1;" />
+  <span style="font-size: 14px; font-weight: 500; min-width: 48px; color: var(--color-text-primary, #222);" id="yearsOut">2 yrs</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; margin: 0 0 0.5rem;">
+  <label style="font-size: 14px; color: var(--color-text-secondary, #666); min-width: 140px;">Net investment return</label>
+  <input type="range" min="2" max="8" value="4" step="1" id="returnRate" style="flex: 1;" />
+  <span style="font-size: 14px; font-weight: 500; min-width: 48px; color: var(--color-text-primary, #222);" id="returnOut">4%</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; margin: 0 0 0.5rem;">
+  <label style="font-size: 14px; color: var(--color-text-secondary, #666); min-width: 140px;">Värmdö SW3 paydown</label>
+  <input type="range" min="0" max="600" value="0" step="50" id="paydown" style="flex: 1;" />
+  <span style="font-size: 14px; font-weight: 500; min-width: 48px; color: var(--color-text-primary, #222);" id="paydownOut">£0k</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; margin: 0 0 1.5rem;">
+  <label style="font-size: 14px; color: var(--color-text-secondary, #666); min-width: 140px;">Future sale price</label>
+  <input type="range" min="5000" max="6500" value="5500" step="100" id="futurePrice" style="flex: 1;" />
+  <span style="font-size: 14px; font-weight: 500; min-width: 64px; color: var(--color-text-primary, #222);" id="futurePriceOut">£5.5m</span>
+</div>
+<div style="position: relative; width: 100%; height: 340px; margin-bottom: 1rem;"><canvas id="barChart"></canvas></div>
+<div id="legend" style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 1rem; font-size: 12px; color: var(--color-text-secondary, #666);"></div>
+<div style="background: var(--color-background-secondary, #f5f5f0); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+  <div style="font-size: 14px; font-weight: 500; margin-bottom: 6px; color: var(--color-text-primary, #222);">Reading this chart</div>
+  <div style="font-size: 13px; color: var(--color-text-secondary, #555);" id="insight"></div>
+</div>
+<table id="summaryTable" style="font-size: 13px;"></table>
+<div style="margin-top: 0.75rem; font-size: 12px; color: var(--color-text-tertiary, #999);">Model uses 2.49% fixed for months 1–14, then BBBR+3.49% (~8%) thereafter, plus 2-month vacant period.</div>
+</div>
+
+<h1>14. Conclusion & recommendation</h1>
+<p>The dual-marketing strategy has given the family two viable options. But the practical constraint of the tenant/vacancy cycle, combined with the May 2027 mortgage cliff, significantly weakens the hold case compared to how it appears on a spreadsheet.</p>
+<p><strong>At £5.5m or above</strong>, selling is the clear winner. No further analysis needed.</p>
+<p><strong>At £5.4m</strong>, selling is the financially safer choice. It banks ~£2.6m net after both mortgages, ERC, and all taxes. It eliminates the rate shock, empty-property trap, cross-border complexity, and FX drift. The £41.5k ERC is an irritation, not a deal-breaker.</p>
+<p><strong>The rental alternative at £20k/month</strong> is viable in the short term but carries a trap. The property covers costs for 14 months while the fixed rate lasts. But there is no clean path from "renting comfortably" to "sold at a good price" without passing through an expensive vacant marketing period on the variable rate — a situation the family has already endured for 10 months.</p>
+<p><strong>If the family does choose to rent</strong>, the honest commitment is a long hold (2–3 years), not a short bridge to spring 2027. A long hold requires accepting the variable rate, mitigating via remortgage or Värmdö paydown, and sustained cross-border complexity. This is defensible with genuine conviction about recovery — but it is a bet, not a plan.</p>
+<p><strong>What should be avoided at all costs</strong> is the middle path: a short let followed by another expensive empty marketing period, this time at triple the mortgage rate.</p>
+
+<div style="text-align: center; margin: 3rem 0 1rem; padding-top: 1.5rem; border-top: 2px solid var(--amber); font-style: italic; color: var(--color-text-tertiary, #999); font-size: 14px;">End of analysis</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+var cs = getComputedStyle(document.documentElement);
+var textPri = cs.getPropertyValue('--color-text-primary').trim() || '#222';
+var textSec = cs.getPropertyValue('--color-text-secondary').trim() || '#888';
+var offerPrices = [5400000,5500000,5600000,5700000,5800000,5900000];
+var offerLabels = ['£5.4m','£5.5m','£5.6m','£5.7m','£5.8m','£5.9m'];
+function netProceeds(sp,pd){var f=sp*0.015+25000;var s=(sp-f)*13.6-56748000;var c=Math.max(0,s*0.27)/13.6;return sp-f-831000-41550-(1560000-pd)-c;}
+function futureNet(sp,y,pd){var fx=13.6+y*0.13;var f=sp*0.015+25000;var s=(sp-f)*fx-56748000;var c=Math.max(0,s*0.27)/fx;return sp-f-831000-(1560000-pd)-c;}
+function mNet(r,pd,v){var a=r*0.12;var o=27000/12;var n5=v?(831000*0.0799/12):(831000*0.0249/12);var sw=(1560000-pd)*(84000/1560000)/12;var tx=Math.max(0,(r-a-o)*0.35);return r-a-o-n5-sw-tx;}
+function hVal(r,fp,y,pd){var cf=0;for(var m=0;m<y*12;m++){if(m>=14&&m<16){cf-=(831000*0.0799/12+(1560000-pd)*(84000/1560000)/12+1500);}else{cf+=mNet(r,pd,m>=16);}}return futureNet(fp,y,pd)+cf;}
+function fRent(sp,y,rt,pd,fp){var sv=netProceeds(sp,pd)*Math.pow(1+rt/100,y);for(var r=10000;r<=35000;r+=100){if(hVal(r,fp,y,pd)>=sv)return r;}return 35000;}
+var chart=null;
+function update(){
+var y=parseInt(document.getElementById('holdYears').value);var rt=parseInt(document.getElementById('returnRate').value);
+var pd=parseInt(document.getElementById('paydown').value)*1000;var fp=parseInt(document.getElementById('futurePrice').value)*1000;
+document.getElementById('yearsOut').textContent=y+' yrs';document.getElementById('returnOut').textContent=rt+'%';
+document.getElementById('paydownOut').textContent='£'+Math.round(pd/1000)+'k';document.getElementById('futurePriceOut').textContent='£'+(fp/1000000).toFixed(1)+'m';
+var rents=offerPrices.map(function(p){return fRent(p,y,rt,pd,fp);});
+var rK=rents.map(function(r){return Math.round(r/100)/10;});
+var cols=rents.map(function(r){return r<=18000?'#1D9E75':r<=22000?'#EF9F27':'#E24B4A';});
+var data={labels:offerLabels,datasets:[{data:rK,backgroundColor:cols.map(function(c){return c+'CC';}),borderColor:cols,borderWidth:1.5,borderRadius:4}]};
+if(chart){chart.data=data;chart.update();}else{
+chart=new Chart(document.getElementById('barChart'),{type:'bar',data:data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return'Need £'+ctx.parsed.y.toFixed(1)+'k/mo';}}}},scales:{x:{title:{display:true,text:'Offer price',font:{size:12},color:textSec},ticks:{font:{size:12},autoSkip:false,color:textPri},grid:{display:false}},y:{min:10,max:35,title:{display:true,text:'Monthly rent needed (£k)',font:{size:12},color:textSec},ticks:{font:{size:11},callback:function(v){return'£'+v+'k';},color:textSec},grid:{color:'rgba(128,128,128,0.15)'}}}}});}
+document.getElementById('legend').innerHTML='<span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#1D9E75;"></span>Achievable (≤18k)</span><span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#EF9F27;"></span>Stretch (18–22k)</span><span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#E24B4A;"></span>Unrealistic (22k+)</span>';
+var bdr='1px solid var(--color-border-tertiary, #e0e0e0)';var t='<tr style="border-bottom:'+bdr+';"><th style="text-align:left;padding:6px 8px;background:#1F3864;color:#fff;">Offer</th><th style="text-align:right;padding:6px 8px;background:#1F3864;color:#fff;">Net if sold</th><th style="text-align:right;padding:6px 8px;background:#1F3864;color:#fff;">Rent to beat</th><th style="text-align:right;padding:6px 8px;background:#1F3864;color:#fff;">Realistic?</th></tr>';
+offerPrices.forEach(function(p,i){var n=netProceeds(p,pd);var v,vc;if(rents[i]<=18000){v='Likely';vc='#1D9E75';}else if(rents[i]<=20000){v='At guide';vc='#1D9E75';}else if(rents[i]<=22000){v='Stretch';vc='#EF9F27';}else if(rents[i]<=25000){v='Ambitious';vc='#EF9F27';}else{v='Unrealistic';vc='#E24B4A';}
+var bg=p===5400000?'background:var(--color-background-secondary, #f5f5f0);':'';t+='<tr style="border-bottom:'+bdr+';'+bg+'"><td style="padding:6px 8px;font-weight:600;color:var(--color-text-primary,#222);">'+offerLabels[i]+'</td><td style="text-align:right;padding:6px 8px;color:var(--color-text-secondary,#666);">£'+(n/1000000).toFixed(2)+'m</td><td style="text-align:right;padding:6px 8px;font-weight:600;color:var(--color-text-primary,#222);">£'+(rents[i]/1000).toFixed(1)+'k/mo</td><td style="text-align:right;padding:6px 8px;font-weight:600;color:'+vc+';">'+v+'</td></tr>';});
+document.getElementById('summaryTable').innerHTML=t;
+var r54=rents[0];var ins=['To beat £5.4m over '+y+' years (selling at £'+(fp/1000000).toFixed(1)+'m): need £'+(r54/1000).toFixed(1)+'k/month.'];
+if(r54<=20000)ins.push("That's at or below the Savills guide — holding is viable.");else if(r54<=23000)ins.push("That's above guide but potentially achievable.");else ins.push("That's well above market — selling wins.");
+if(pd>0){var r54np=fRent(5400000,y,rt,0,fp);var sv=r54np-r54;if(sv>0)ins.push('Värmdö paydown saves £'+(sv/1000).toFixed(1)+'k/month on the required rent.');}
+document.getElementById('insight').innerHTML=ins.join('<br>');}
+document.getElementById('holdYears').addEventListener('input',update);
+document.getElementById('returnRate').addEventListener('input',update);
+document.getElementById('paydown').addEventListener('input',update);
+document.getElementById('futurePrice').addEventListener('input',update);
+update();
+</script>
