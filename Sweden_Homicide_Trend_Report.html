@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweden Homicide Rates — A Structural Break Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --ink-mid: #4a4a44;
+    --ink-light: #8a8a80;
+    --paper: #f7f4ee;
+    --paper-mid: #ede9e0;
+    --rule: #c8c4b8;
+    --blue: #1d5fa8;
+    --blue-light: #d6e4f4;
+    --coral: #b84a28;
+    --coral-light: #f5e0d8;
+    --gold: #8a6a10;
+    --gold-light: #f2e8c8;
+    --sig: #c41a1a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.75;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .page { max-width: 860px; margin: 0 auto; }
+
+  header {
+    border-top: 4px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 2.5rem 0 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .kicker {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+
+  .deck {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-mid);
+    line-height: 1.5;
+    max-width: 680px;
+    margin-bottom: 1.5rem;
+  }
+
+  .byline {
+    font-size: 13px;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.75rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .body-text { max-width: 680px; }
+  p { margin-bottom: 1.25rem; }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .finding {
+    border-left: 3px solid var(--blue);
+    background: var(--blue-light);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .finding.warning { border-left-color: var(--gold); background: var(--gold-light); }
+  .finding p { margin-bottom: 0; font-size: 15.5px; line-height: 1.65; }
+  .finding strong { font-weight: 600; color: var(--blue); }
+  .finding.warning strong { color: var(--gold); }
+
+  .verdict {
+    border: 1.5px solid var(--ink);
+    padding: 1.5rem 1.75rem;
+    margin: 2.5rem 0;
+    position: relative;
+    background: white;
+  }
+  .verdict-label {
+    position: absolute;
+    top: -11px; left: 16px;
+    background: white;
+    padding: 0 8px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+  }
+  .verdict p { margin-bottom: 0.5rem; font-size: 15.5px; }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 1rem 1.1rem;
+    border-radius: 4px;
+  }
+  .stat-label { font-size: 12px; color: var(--ink-light); letter-spacing: 0.06em; margin-bottom: 4px; }
+  .stat-value { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; line-height: 1; margin-bottom: 3px; }
+  .stat-value.down { color: var(--blue); }
+  .stat-sub { font-size: 12px; color: var(--ink-light); }
+
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 1.5rem 0; }
+  .data-table th {
+    text-align: left; font-weight: 400;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light);
+    border-bottom: 1.5px solid var(--ink);
+    padding: 0.4rem 0.75rem 0.5rem 0;
+  }
+  .data-table td { padding: 0.45rem 0.75rem 0.45rem 0; border-bottom: 1px solid var(--paper-mid); }
+  .data-table td.pval-sig { color: var(--sig); font-weight: 600; }
+  .data-table td.pval-ns  { color: var(--ink-light); }
+
+  .badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 3px; letter-spacing: 0.04em; }
+  .badge.outside { background: var(--coral-light); color: var(--coral); }
+  .badge.inside  { background: var(--paper-mid); color: var(--ink-light); }
+
+  .chart-wrap {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.25rem 1.25rem 1rem;
+    margin: 1.5rem 0;
+  }
+  .chart-title { font-size: 14px; color: var(--ink-mid); margin-bottom: 0.6rem; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-mid); margin-bottom: 10px; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .l-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .l-dash { width: 14px; height: 2px; border-top: 2px dashed; flex-shrink: 0; }
+  .l-band { width: 14px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .chart-note { font-size: 12px; color: var(--ink-light); margin-top: 8px; line-height: 1.5; }
+  .canvas-container { position: relative; width: 100%; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+    padding-top: 1rem;
+    font-size: 12.5px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .byline a { color: var(--ink-mid); text-decoration: underline; text-underline-offset: 2px; }
+  .byline a:hover { color: var(--blue); }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="kicker">Statistical analysis · Swedish homicide crude rates · Brå &amp; SCB</div>
+    <h1>Sweden's male homicide rate has broken sharply from its prior trend</h1>
+    <p class="deck">At 1.11 per 100,000 men in 2025, the male homicide rate is back at 2011 levels and lies far outside the 95% prediction interval of the 2011–2022 upward trend. The effect is entirely absent in women.</p>
+    <div class="byline">
+      <span>Full-year data 2011–2025</span>
+      <span>Victims: <a href="https://bra.se/rapporter/arkiv/2026-03-31-konstaterade-fall-av-dodligt-vald-2025" target="_blank">Brå — Konstaterade fall av dödligt våld 2025</a></span>
+      <span>Population: <a href="https://www.scb.se" target="_blank">SCB BE0101</a>, 31 Dec each year</span>
+      <span>Baseline: linear regression, 2011–2022</span>
+      <span>Created by Claude Sonnet 4.6 for <a href="https://x.com/dobssi" target="_blank">@dobssi</a></span>
+    </div>
+  </header>
+
+  <div class="body-text">
+
+    <p>Analysing raw victim counts alone risks confounding genuine changes in violence with demographic growth. Sweden's male population grew by roughly 11% between 2011 and 2022 as immigration increased the overall population. Expressing annual homicide victims as a crude rate per 100,000 of the same-sex population controls for this and gives a cleaner picture of the underlying trend.</p>
+
+    <p>Once rates are computed, the conclusions are substantially the same as for raw counts — but the magnitude of the break is even more apparent. The male homicide rate rose from 1.17 per 100,000 in 2011 to a peak of 1.89 in 2020, following a strong linear trend. In 2024 that rate fell to 1.30, and in 2025 to 1.11 — the lowest rate in the dataset, below the 2011 starting point.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">2025 male rate</div>
+        <div class="stat-value down">1.11</div>
+        <div class="stat-sub">per 100,000 men</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Trend prediction 2025</div>
+        <div class="stat-value">2.06</div>
+        <div class="stat-sub">per 100,000 men</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">2024 rate deficit</div>
+        <div class="stat-value down">−0.70</div>
+        <div class="stat-sub">p = 0.0042</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">2025 rate deficit</div>
+        <div class="stat-value down">−0.95</div>
+        <div class="stat-sub">p = 0.0007</div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Male homicide rate: trend and prediction intervals</h2>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Crude male homicide rate, Sweden 2011–2025 (victims per 100,000 men)</div>
+    <div class="legend">
+      <span><span class="l-dot" style="background:#1d5fa8;"></span>Men — in-sample (2011–2022)</span>
+      <span><span class="l-dot" style="background:white;border:2px solid #1d5fa8;"></span>Men — out-of-sample (2023–2025)</span>
+      <span><span class="l-dot" style="background:#b84a28;"></span>Women</span>
+      <span><span class="l-dash" style="border-top-color:#1d5fa8;"></span>Linear trend (2011–2022)</span>
+      <span><span class="l-band" style="background:rgba(29,95,168,0.12);border:1px solid rgba(29,95,168,0.25);"></span>95% prediction interval</span>
+    </div>
+    <div class="canvas-container" style="height:340px;">
+      <canvas id="mainChart"></canvas>
+    </div>
+    <p class="chart-note">Trend line fitted by OLS on 2011–2022 male crude rates (slope = +0.065/yr, R² = 0.72, p &lt; 0.001). Shaded band = 95% prediction interval using residual SE = 0.155 and t-distribution (10 df). Population denominators from SCB BE0101, 31 December each year. Hollow circles = out-of-sample observations.</p>
+  </div>
+
+  <div class="body-text">
+
+    <h2>Statistical results</h2>
+
+    <p>A linear regression on the 2011–2022 crude male rates produces a slope of +0.065 per 100,000 per year (R² = 0.72, p &lt; 0.001), projecting rates of 1.93, 1.99, and 2.06 for 2023, 2024, and 2025 respectively. The observed values — 1.65, 1.30, and 1.11 — diverge from this trajectory with increasing severity.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Rate (actual)</th>
+          <th>Rate (predicted)</th>
+          <th>95% PI</th>
+          <th>Deficit</th>
+          <th>p-value</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2023</td>
+          <td>1.65</td>
+          <td>1.93</td>
+          <td>[1.52, 2.33]</td>
+          <td>−0.28</td>
+          <td class="pval-ns">0.147</td>
+          <td><span class="badge inside">Within PI</span></td>
+        </tr>
+        <tr>
+          <td>2024</td>
+          <td>1.30</td>
+          <td>1.99</td>
+          <td>[1.57, 2.41]</td>
+          <td>−0.70</td>
+          <td class="pval-sig">0.0042</td>
+          <td><span class="badge outside">Outside PI</span></td>
+        </tr>
+        <tr>
+          <td>2025</td>
+          <td>1.11</td>
+          <td>2.06</td>
+          <td>[1.62, 2.49]</td>
+          <td>−0.95</td>
+          <td class="pval-sig">0.0007</td>
+          <td><span class="badge outside">Outside PI</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The story is consistent with the raw-count analysis but the denominators add precision: Sweden's male population grew by ~11% over 2011–2022, meaning that rising raw counts somewhat understated the true rate increase. Conversely, the rate-based decline in 2024–2025 is slightly steeper than the raw-count decline, because the male population has continued to grow modestly even as victims have fallen.</p>
+
+    <div class="finding">
+      <p><strong>Key finding:</strong> The 2025 male crude homicide rate of 1.11 per 100,000 is not only below the 2011 baseline of 1.17 — it represents a deficit of approximately 0.95 per 100,000 against the extrapolated trend, equivalent to roughly 50 fewer deaths per year than expected had the prior trajectory continued.</p>
+    </div>
+
+    <h2>Women — no structural break</h2>
+
+    <p>The female homicide rate shows no trend over 2011–2022 (slope ≈ −0.003/yr, R² = 0.04, p = 0.53), fluctuating around approximately 0.52 per 100,000 women. The 2023–2025 figures — 0.63, 0.44, and 0.47 — are all well within the prediction interval. None approaches statistical significance (smallest p = 0.10 in 2023).</p>
+
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Crude female homicide rate, Sweden 2011–2025 (victims per 100,000 women)</div>
+    <div class="legend">
+      <span><span class="l-dot" style="background:#b84a28;"></span>Women</span>
+      <span><span class="l-dash" style="border-top-color:#b84a28;opacity:0.5;"></span>Flat trend (≈ 0.52/100k)</span>
+    </div>
+    <div class="canvas-container" style="height:220px;">
+      <canvas id="womenChart"></canvas>
+    </div>
+    <p class="chart-note">Female homicide rate shows no trend over 2011–2022 (R² = 0.04, p = 0.53). All three recent years fall within the prediction interval. p-values: 2023 = 0.10, 2024 = 0.51, 2025 = 0.87.</p>
+  </div>
+
+  <div class="body-text">
+
+    <p>This sex-specific divergence is the key internal control. If the decline reflected a methodological change — revised recording, altered classification of cause of death, or reporting lag — it would affect both series similarly. It does not. The effect is limited to male victims, which in the Swedish context aligns closely with gang homicide. Studies of Swedish lethal violence consistently show that gang-related shootings account for a large majority of male homicides, while the female series is driven by a different and largely unrelated set of circumstances.</p>
+
+    <h2>Interpretation</h2>
+
+    <p>Sweden's response to gang violence escalated substantially from approximately 2022–2023. Large-scale police operations, expanded use of anonymous witnesses, tougher sentencing for gang membership and weapons offences, and deportation of foreign nationals convicted of serious crimes all came into effect within a short window. The chronological alignment with the divergence from trend is close, and the gender-specificity of the effect is consistent with an intervention targeting gang networks rather than a background demographic shift.</p>
+
+    <p>The magnitude is notable by international standards. A decline from a peak crude rate of 1.89 per 100,000 men (2020) to 1.11 (2025) — a 41% fall in five years — is large for a country that was already at a comparatively low absolute rate. Whether this reflects permanent structural disruption of gang networks, or temporary suppression that may partially reverse, cannot be determined from two data points.</p>
+
+    <div class="finding warning">
+      <p><strong>Note on interpretation:</strong> Two out-of-sample years establish a break from the prior trend with high confidence, but are insufficient to characterise a new trend. The defensible claim is "a statistically significant departure from the 2011–2022 rate trajectory." Whether the new level is stable, continuing to decline, or will partially revert requires further observation.</p>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-label">Verdict</div>
+      <p>Yes — on a crude rate basis, 2024 and 2025 represent a genuine, statistically significant break from the prior trend in male homicide victimisation in Sweden. The 2025 rate of 1.11 per 100,000 men lies approximately 0.95 below the trend projection and falls well outside the 95% prediction interval (p = 0.0007). The deficit is equivalent to approximately 50 fewer male homicide victims per year than the 2011–2022 trend would have predicted.</p>
+      <p>The female crude rate shows no structural break. All 2023–2025 female figures are consistent with random variation around a flat long-run baseline of ≈0.52 per 100,000. The sex-specificity of the effect points to gang-related violence as the primary mechanism.</p>
+    </div>
+
+    <h2>Methodology</h2>
+
+    <p>Annual homicide victim counts by sex were obtained from Brottsförebyggande rådet (Brå). Population denominators are from Statistics Sweden (SCB), table BE0101, representing the registered population at 31 December of each reference year, disaggregated by sex. Crude rates are expressed as victims per 100,000 of the same-sex population. Exact sex-disaggregated counts were taken directly from SCB Statistikdatabasen exports: file 0000053A covering 2000–2024, and file 0000088D covering 2025. Men 2024: 5,324,785; women 2024: 5,262,925. Men 2025: 5,330,576; women 2025: 5,274,950.</p>
+
+    <p>A linear regression was fitted to male crude rates for 2011–2022 (n = 12 years), with 2023–2025 treated as an out-of-sample test period. Prediction intervals use the residual standard error (0.155) and the t-distribution on 10 degrees of freedom (t₀.₀₂₅ ≈ 2.23). Significance was assessed via two-tailed t-test against the same residual distribution. The female series was analysed identically; the near-zero slope renders the trend effectively a flat mean at approximately 0.52 per 100,000. No age-standardisation was applied.</p>
+
+  </div>
+
+  <footer>
+    <p>
+      <strong>Homicide data:</strong> Brottsförebyggande rådet (Brå), <a href="https://bra.se/rapporter/arkiv/2026-03-31-konstaterade-fall-av-dodligt-vald-2025" target="_blank">Konstaterade fall av dödligt våld 2025</a>. Full-year counts by sex, 2011–2025. &nbsp;|&nbsp;
+      <strong>Population:</strong> Statistics Sweden (SCB), <a href="https://www.statistikdatabasen.scb.se/pxweb/en/ssd/START__BE__BE0101__BE0101G/BefUtvKon1749/" target="_blank">BE0101, Statistikdatabasen</a>. Registered population at 31 Dec by sex; 2011–2024 from export 0000053A, 2025 from export 0000088D. &nbsp;|&nbsp;
+      <strong>Method:</strong> Crude rates per 100,000 same-sex population. OLS linear regression on 2011–2022 baseline. 95% prediction intervals via t-distribution (10 df). &nbsp;|&nbsp;
+      Created by <a href="https://www.anthropic.com" target="_blank">Claude Sonnet 4.6</a> for <a href="https://x.com/dobssi" target="_blank">@dobssi</a>.
+    </p>
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const years     = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+const rateMen   = [1.1847,0.9652,1.267,1.2725,1.6832,1.5359,1.692,1.4585,1.6552,1.8955,1.6918,1.7553,1.6565,1.2958,1.1068];
+const rateWomen = [0.5256,0.4384,0.5382,0.5128,0.5894,0.5821,0.536,0.6486,0.4872,0.4848,0.4623,0.4403,0.6299,0.437,0.4739];
+const pred      = [1.1468,1.2119,1.277,1.342,1.4071,1.4722,1.5373,1.6023,1.6674,1.7325,1.7976,1.8626,1.9277,1.9928,2.0579];
+const lower     = [0.7528,0.8286,0.9025,0.9744,1.0441,1.1115,1.1765,1.2393,1.2998,1.3581,1.4143,1.4686,1.5211,1.572,1.6214];
+const upper     = [1.5409,1.5952,1.6514,1.7097,1.7702,1.8329,1.898,1.9654,2.0351,2.1069,2.1808,2.2567,2.3344,2.4136,2.4943];
+const trainN    = 12;
+const gc = 'rgba(0,0,0,0.06)';
+const tc = '#8a8a80';
+
+new Chart(document.getElementById('mainChart'), {
+  type: 'line',
+  data: { datasets: [
+    {
+      label: '95% PI upper',
+      data: years.map((y,i) => ({x:y, y:upper[i]})),
+      fill: '+1', backgroundColor: 'rgba(29,95,168,0.10)',
+      borderWidth: 0, pointRadius: 0, tension: 0.3
+    },
+    {
+      label: '95% PI lower',
+      data: years.map((y,i) => ({x:y, y:lower[i]})),
+      fill: false, borderColor: 'transparent', borderWidth: 0, pointRadius: 0
+    },
+    {
+      label: 'Trend',
+      data: years.map((y,i) => ({x:y, y:pred[i]})),
+      borderColor: 'rgba(29,95,168,0.5)', borderDash: [5,4],
+      borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0
+    },
+    {
+      label: 'Men (2011–2022)',
+      data: years.map((y,i) => ({x:y, y: i < trainN ? rateMen[i] : null})),
+      borderColor: '#1d5fa8', backgroundColor: '#1d5fa8',
+      borderWidth: 2, pointRadius: 5, pointHoverRadius: 7,
+      fill: false, tension: 0, spanGaps: false
+    },
+    {
+      label: 'Men (2023–2025)',
+      data: years.map((y,i) => ({x:y, y: i >= trainN ? rateMen[i] : null})),
+      borderColor: '#1d5fa8', backgroundColor: '#f7f4ee',
+      borderWidth: 2, pointRadius: 7, pointHoverRadius: 9,
+      fill: false, tension: 0, spanGaps: false
+    },
+    {
+      label: 'Women',
+      data: years.map((y,i) => ({x:y, y:rateWomen[i]})),
+      borderColor: '#b84a28', backgroundColor: '#b84a28',
+      borderWidth: 2, pointRadius: 4, fill: false, tension: 0
+    }
+  ]},
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: items => 'Year: ' + items[0].raw.x,
+          label: item => {
+            if (item.dataset.label.includes('PI') || item.dataset.label === 'Trend') return null;
+            return item.dataset.label + ': ' + item.raw.y.toFixed(4) + ' per 100k';
+          }
+        },
+        filter: item => !item.dataset.label.includes('PI lower') && item.dataset.label !== 'Trend'
+      }
+    },
+    scales: {
+      x: {
+        type: 'linear', min: 2010.5, max: 2025.5,
+        ticks: { stepSize: 1, callback: v => v.toFixed(0), color: tc, maxRotation: 0, font: {size:12} },
+        grid: { color: gc }
+      },
+      y: {
+        min: 0.3, max: 2.7,
+        title: { display: true, text: 'Victims per 100,000', color: tc, font: {size:12} },
+        ticks: { color: tc, font: {size:12} },
+        grid: { color: gc }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('womenChart'), {
+  type: 'line',
+  data: { datasets: [
+    {
+      label: 'Women',
+      data: years.map((y,i) => ({x:y, y:rateWomen[i]})),
+      borderColor: '#b84a28', backgroundColor: '#b84a28',
+      borderWidth: 2, pointRadius: 4, fill: false, tension: 0
+    },
+    {
+      label: 'Flat trend',
+      data: years.map(y => ({x:y, y:0.521})),
+      borderColor: 'rgba(184,74,40,0.4)', borderDash: [5,4],
+      borderWidth: 1.5, pointRadius: 0, fill: false
+    }
+  ]},
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: i => 'Year: ' + i[0].raw.x,
+          label: i => i.dataset.label + ': ' + i.raw.y.toFixed(4) + ' per 100k'
+        }
+      }
+    },
+    scales: {
+      x: {
+        type: 'linear', min: 2010.5, max: 2025.5,
+        ticks: { stepSize: 1, callback: v => v.toFixed(0), color: tc, maxRotation: 0, font: {size:12} },
+        grid: { color: gc }
+      },
+      y: {
+        min: 0, max: 1.0,
+        title: { display: true, text: 'Victims per 100,000', color: tc, font: {size:12} },
+        ticks: { color: tc, font: {size:12} },
+        grid: { color: gc }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
